@@ -1,0 +1,250 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML lang="ja">
+
+<HEAD>
+<TITLE>Kanji Flashcards</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+
+<STYLE type="text/css">
+<!--
+.topline {
+	BACKGROUND: #bfb892;
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 22px;
+	COLOR: green; 
+	LETTER-SPACING: 1px; 
+	HEIGHT: 50px; 
+	WIDTH: 850px;
+	TEXT-ALIGN: center;
+	PADDING-TOP: 11px;
+	BORDER-TOP: 4px dashed black;
+	BORDER-BOTTOM: 0;
+	BORDER-LEFT: 4px dashed black;
+	BORDER-RIGHT: 4px dashed black;
+}
+
+.kanji {
+	BACKGROUND: #a0abcd; 
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 200px;
+	COLOR: #ffffff; 
+	LETTER-SPACING: 1px; 
+	HEIGHT: 210px; 
+	WIDTH: 850px;
+	TEXT-ALIGN: center;
+	PADDING-TOP: 30px;
+	BORDER-TOP: 0;
+	BORDER-BOTTOM: 0;
+	BORDER-LEFT: 4px dashed black;
+	BORDER-RIGHT: 4px dashed black;
+}
+
+.bottomline {
+	BACKGROUND: #2fb892; 
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 25px; 
+	COLOR: #000000; 
+	LETTER-SPACING: 1px; 
+	HEIGHT: 50px; 
+	WIDTH: 850px;
+	TEXT-ALIGN: center;
+	PADDING-TOP: 5px;
+	BORDER-TOP: 0;
+	BORDER-BOTTOM: 4px dashed black;
+	BORDER-LEFT: 4px dashed black;
+	BORDER-RIGHT: 4px dashed black;
+}
+
+
+.startbutton {
+	BACKGROUND: #000000; 
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	FONT-FAMILY: sans-serif; 
+	COLOR: #ffffff; 
+	LETTER-SPACING: 1px; 
+	HEIGHT: 60px; 
+	WIDTH: 200px;
+	TEXT-ALIGN: center;
+}
+
+.arrowbutton {
+	BACKGROUND: #000000; 
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	FONT-FAMILY: sans-serif; 
+	COLOR: #ffffff; 
+	LETTER-SPACING: 1px; 
+	HEIGHT: 60px; 
+	WIDTH: 100px;
+	TEXT-ALIGN: center;
+}
+
+.delay {
+	WIDTH: 25px;
+	TEXT-ALIGN: center;
+}
+
+.options {
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 12px;
+	FONT-FAMILY: sans-serif;
+	TEXT-ALIGN: center;
+}
+-->
+</STYLE>
+
+<SCRIPT language=JavaScript type="text/javascript">
+// variables
+var kanjiA = new Array();
+var topArr = new Array();
+var bottomArr = new Array();
+var numFlashcards;
+var map = new Array ();
+var mapIndex;
+
+// functions
+function init() {
+	for (i=0; i<numFlashcards; i++)
+		{
+		map[i] = i;
+		}
+	document.f.kanji.value = "";
+	document.f.topline.value = "";
+	document.f.bottomline.value = "";
+	mapIndex = -1;
+	scramble();
+	nextKanji();
+	}
+
+function nextKanji() {
+	if (mapIndex < numFlashcards-1)
+		{
+		mapIndex++;
+		document.f.kanji.value = kanjiA[map[mapIndex]];
+		document.f.topline.value = "";
+		document.f.bottomline.value = "";
+		if (eval("document.f.displayTop.checked") == true)
+			{
+			setTimeout("showTop()", document.f.delay.value*1000);
+			}
+		else if (eval("document.f.displayBottom.checked") == true)
+			{setTimeout("showBottom()", document.f.delay.value*1000);}
+		}
+	else
+		{
+		done();
+		}
+	}
+
+function previousKanji() {
+	if (mapIndex > 0)
+		{
+		mapIndex--;
+		document.f.kanji.value = kanjiA[map[mapIndex]];
+		document.f.topline.value = "";
+		document.f.bottomline.value = "";
+		if (eval("document.f.displayTop.checked") == true)
+			{
+			setTimeout("showTop()", document.f.delay.value*1000);
+			}
+		else if (eval("document.f.displayBottom.checked") == true)
+			{setTimeout("showBottom()", document.f.delay.value*1000);}
+		}
+	else
+		{
+		done();
+		}
+	}
+
+function showTop() {
+	document.f.topline.value = topArr[map[mapIndex]];
+	if (eval("document.f.displayBottom.checked") == true)
+		{setTimeout("showBottom()", document.f.delay.value*1000);}
+	}
+
+function showBottom() {
+	document.f.bottomline.value = bottomArr[map[mapIndex]];
+	}
+
+function done() {
+	alert("Click START for a new game.");
+	}
+
+function scramble() {
+	for (z = 0; z < 2; z++) {
+		for (x = 0; x < numFlashcards; x++) {
+			randomI = Math.floor(Math.random()*numFlashcards);
+			randomVal = map[randomI];
+			savedVal = map[x];
+			map[x] = randomVal;
+			map[randomI] = savedVal;
+			}
+		}
+	}
+
+</SCRIPT>
+</HEAD>
+
+<BODY background="../joshu/images/bg_blackwhite.jpg" bgcolor="#ffffff">
+
+<center>
+<h2>Kanji N3 - ngày 1
+</h2>
+
+
+<form name="f" ACTION="post"> 
+<SCRIPT LANGUAGE="JavaScript" type="text/javascript">
+<!-- Begin
+
+// variables
+kanjiA = new Array
+("仕","任","信","伸","代","付","件","位","倍","保","個"
+);
+
+topArr = new Array
+("SỸ / シ / 仕事: しごと / 仕入れる: しいれる","NHIỆM / ニン / まか・せる / 責任: せきにん / 担任: たんにん / 任せる: まかせる","TÍN / シン / 信じる: しんじる / 通信: つうしん / 信号: しんごう / 信用: しんよう","THÂN","ĐẠI","PHÓ","KIỆN","VỊ","BỘI","BẢO", "CÁ"
+);
+
+bottomArr = new Array
+("私の仕事は教師です / 野菜を仕入れる","責任がある/ない / 担任の先生 / 後輩に仕事を任せる","彼氏を信じる / 通信会社 / 信号を持 / 彼は信用できる人間だ","THÂN","ĐẠI","PHÓ","KIỆN","VỊ","BỘI","BẢO", "CÁ"
+);
+ numFlashcards = 11;
+//  End -->
+</SCRIPT>
+
+
+<input class=startbutton type="button" value="スタート" name="start" onClick="javascript:init()">
+<br>
+<br><input class=topline type="text" size="30" name="topline" value="">
+<br><input class=kanji type="text" size="30" name="kanji" value="Kanji N3">
+<br><input class=bottomline type="text" size="30" name="bottomline" value="">
+<br>
+<br>
+<input class=arrowbutton type="button" value="<--" name="previous" onClick="previousKanji()">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<FONT class=options> Delay (seconds): </FONT><input class=delay type="text" value="2" name="delay">
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input class=arrowbutton type="button" value="-->" name="next" onClick="nextKanji()">
+
+<br>
+<table>
+<tr>
+<td><input class=options type=checkbox name=displayTop checked="checked"></td>
+<td><FONT class=options>display top line</FONT></td>
+</tr>
+
+<tr>
+<td><input type=checkbox name=displayBottom checked="checked"></td>
+<td><FONT class=options>display bottom line</FONT></td>
+</tr>
+</table>
+
+
+</form>
+</center>
+</BODY>
+</HTML>
